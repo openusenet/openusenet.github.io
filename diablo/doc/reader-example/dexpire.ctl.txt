@@ -1,0 +1,19 @@
+# ======================================================================
+# DEXPIRE.CTL - how we expire the header database
+#
+# --------------------------------------------------------------
+# Keep articles for 30 days, but don't let any group have more than
+# 200,000 articles (more than that is probably too much for clients
+# on slow links
+
+*:x30:j200000
+
+# Lower the expiry time for binaries. The 'j' value is inherited
+# from the above entry
+
+*.bina*:x2
+
+# Further limit the control.cancel spam
+
+control.cancel:x2:j10000
+

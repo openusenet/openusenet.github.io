@@ -1,0 +1,29 @@
+<html>
+<head><title>Hints on upgrading Diablo</title></head>
+<body bgcolor="#ffffff">
+<center><h2>Hints on Upgrading Diablo</h2></center>
+<hr>
+<h3>Upgrading from pre2.0 to 2.0</h3>
+<b>Newsfeeding</b>
+<ul>
+<li>Use dprimehostcache to pre-create your host cache file. This allows
+    servers to connect immediately.
+<li>If you are seeing a large number of rejects for incoming articles
+    from a site, use the dnewsfeeds option 'precomreject' to reject
+    rather than defer precommit hits for articles from that site. It is
+    likely that it does not handle 431 responses gracefully and is
+    sending duplicate articles. Older versions of Diablo are some of
+    the culprits.
+</ul>
+<b>Newsreading</b>
+<ul>
+<li>Authentication is now configured with dreader.access with a
+    new format and many more options.
+<li>Enable news.debug in syslog to see more verbose logging of exactly
+    what commands are being used by a client. This can generate huge
+    log files, so its use is not recommended unless you are having
+    problems with news client.
+</ul>
+<hr>
+</body>
+</html>

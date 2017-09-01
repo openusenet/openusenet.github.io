@@ -1,0 +1,173 @@
+SETTING UP A DEDICATED DIABLO FEEDER TO WORK WITH
+ONE OR MORE DIABLO READER BOXES, WHERE EACH READER
+RUNS ITS OWN MINI-FEEDER.
+
+PART 1 - DEDICATED FEEDER CONFIGURATION
+=======================================
+
+Current Setup:  One dedicated peering feeder, with 40 peers.
+(Diablo 2.2-REL, FreeBSD 3.4-REL, 1024 MB RAM, 27 GB system
+disk, 27 GB dedicated spool disk, both 7200 RPM EIDE ATA/66).
+System is ranked #82 on the May 2000 Usenet Top 1000.
+
+Goal:  To set up a series of "dedicated" reader machines, each
+fed by the peering feeder.  One reader will be assigned binary
+groups, the other reader non-binary groups.  Each reader will
+have a local 300 GB spool, consisting of four IBM 75 GB EIDE
+ATA/66 7200 RPM drives, in a ccd configuration.  Each reader
+also has a 9 GB SCSI boot disk, that holds /news/dqueue.
+
+Because this configuration _may_ expand in the future, I have
+chosen to do article mastering (xref generation) on the peering
+feeder machine.  By doing mastering at the earliest possible
+point, Russell Vincent <rv @ openusenet.org> pointed out to me
+that it eliminates complexity when adding additional machines.
+If you're running only one reader, you don't need to do this.
+
+Some clarification is in order... when I say "reader" machine,
+I'm implying a "reader" that's running it's own "feeder" so it
+can receive articles from my main "peering feeder" and store
+those "realtime" articles in its (the reader's) huge spool.
+
+Further clarification... the purpose of my dedicated peering
+feeder (as I'll call it) is to act as a news article router
+for the outside world (and to my internal readers).  It does
+not maintain a huge article spool.  In fact, most exchanges
+(in dnntpspool.ctl) are set to "realtime."  Some aren't, how-
+ever, to ensure a propagation path for all articles even when
+there's a connectivity glitch on the net (BGP route flaps, or
+my tripping over our ethernet).  Much to the chagrin of some
+developers, most of our dnewsfeeds entries are set to "rtflush."
+This isn't wise or necessary, unless you want to try your hand
+at competing in the "mine's bigger than yours" arena.
+
+Let's begin... here's how I've configured the dedicated feeder:
+
+[ /news/diablo.config ]
+version 1.20
+(path statements were fine)
+expire feeder
+hash crc
+hsize 8m
+active on
+activedrop off
+slave off
+maxconnect 15
+remember 3
+hostcacherebuildtime 3600
+displayadminversion on
+precommittime 30
+
+[ /news/diablo.hosts ]
+In addition to the external peering hosts, I've had to specify
+my reader machine so its (my reader's feeder) can post articles
+back into the peering feeder for distribution to the world:
+# news.via.net - Main reader machine
+# Lew Payne <newsadmin @ via.net>
+#
+209.81.9.56                     vianet
+news.via.net                    vianet
+
+[ /news/dnewsfeeds ]
+Here are some worthwhile things I've implemented in this file.
+For major (busy) peers, I split my outgoing feed to them into
+two streams.  I've found this to give me a much better article
+acceptance rate than mixing large binaries with small articles
+in one stream.  Here are the definitions...
+
+groupdef        SMALL
+  maxcross      12
+  maxsize       8k
+end
+
+groupdef        LARGE
+  maxcross      12
+  minsize       8k
+end
+
+As I said, major peers now get fed two streams.  In addition,
+I periodically scan their headers and remove close neighboring
+peers, thus again boosting their article acceptance rate...
+
+label megawidgets
+  # Don't feed them their own articles, dummy
+  alias         bignews.megawidgets.net
+  # Don't bother feeding them fast neighbors
+  alias         feed.neighbor.com
+  alias         news.nexdoor.com
+  # Send them all groups except specified ones
+  addgroup      *
+  delgroupany   alt.svens*
+  delgroupany   alt.diablo.*
+  delgroupany   rec.humor.flame*
+  # This is our small article feed
+  groupref      SMALL
+  rtflush
+end
+
+label megawidgets-2
+  # Don't feed them their own articles, dummy
+  alias         bignews.megawidgets.net
+  # Don't bother feeding them their neighbors
+  alias         feed.neighbor.com
+  alias         news.nexdoor.com
+  # Send them all groups except specified ones
+  addgroup      *
+  delgroupany   alt.svens*
+  delgroupany   alt.diablo.*
+  delgroupany   rec.humor.flame*
+  # Peer requests 1m file limit
+  maxsize       1m
+  # This is our large article feed
+  groupref      LARGE
+  # No need to rtflush the biggies
+  # rtflush
+end
+
+In addition, I need to allow my local news reader machine to
+post articles into the main feeder's stream, for distribution
+to the outside world.  Technically, what's happening is my
+reader's mini-feeder is posting articles back to my peer feeder...
+
+label vianet
+  alias         news.via.net
+  addgroup      *
+  # No need to rtflush, nobody's going to beat us here!
+  #rtflush
+end
+
+[ /news/dnntpspool.ctl ]
+Now that we've created split feeds in /news/dnewsfeeds, we do
+something useful with them here by setting up the links.  The
+small articles are given less buffers, and the big articles more.
+
+megaways   feed-in.megawidgets.net 1 nobatch realtime T16384 R8192
+megaways-2 feed-in.megawidgets.net 1         realtime T65536 R8192
+
+In addition, we have to provide our internal news reader (with its
+own mini-feeder) a feed too, so it can receive and store articles.
+It's a local machine, so there's no sense in splitting up the feeds
+to it into large and small articles, as we're the only source of
+articles for it (on a local LAN, to boot!).  We do, however, allow
+our main feeder (not the reader's mini-feeder) to spool up to 12
+files (120 minutes worth of articles) for the reader, should it be
+down for some reason (which is unlikely).  Since the reader needs
+a mini-feeder running on the reader machine, we specify the feeder
+port (435), as the default nntp port is for readers.  In addition,
+we only allow a maximum of two dnewslinks to catch up articles to
+the reader should something delay the feed.
+
+vianet      news.via.net          12 n2 p435 realtime T65536 R8192
+
+[ /etc/rc.local ]
+Of course, we want Diablo to start automatically any time
+this machine is started (and it should never be stopped)...
+
+#  Get the Diablo feeder running
+#
+echo "  Starting DIABLO feeder..."
+/news/dbin/diablo -p feeder.via.net -h feeder.via.net \
+                  -A newsadmin@via.net "-s " -R 16384 server
+
+END OF PART ONE - DEDICATED FEEDER CONFIGURATION
+

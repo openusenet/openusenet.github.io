@@ -1,0 +1,170 @@
+<html>
+<head><title>Diablo Release Information</title></head>
+<body bgcolor="#ffffff">
+<h2>Diablo Release Information</h2>
+<hr>
+The latest release version of Diablo is
+<a href="download/diablo-5.1-REL.tgz">5.1-REL</a>. This and  previous
+versions of Diablo are available from
+the <a href="download/">OpenUsenet Diablo download</a> page.
+<p>
+Full details of the changes can be found in the
+<a href="download/RELEASE_NOTES.txt">RELEASE_NOTES</a>.<br>
+<p>
+<b>Major changes from Diablo 5.0-REL to 5.1-REL:</b><br>
+<ul>
+<li>Fix a posting corruption bug that has existed since the original Diablo - highly recommended to upgr
+ade to fix this.
+<li>Maximum Age Policy - controls maximum article age.
+<li>Changes to hashfeed - REQUIRES CONFIG FILE CHANGE if hashfeed is enabled.
+<li>New diablo.config option 'readeridenttimeout'.
+<li>New dreaderd option 'ratelimitrange'.
+<li>New contrib/ for 'feedgraph' - RRD graphs for feeds.
+<li>New dreaderd dserver.hosts options 'retention' and 'groupdef'.
+<li>Extension fo dexpire '-s' to sync after a number of files deleted.
+<li>Various improvements to mmap and madvise compatibility.
+<li>New diablo.config option 'feedermaxheadersize'.
+<li>Many, many other smaller additions, fixes and performance improvements.
+</ul>
+<p>
+<b>Major changes from Diablo 4.x to 5.0-REL:</b><br>
+<ul>
+<li>New history expire/rebuild (dhisexpire) for minimal server downtime.
+<li>Capability for much larger history files
+<li>Experimental IPv6 support.
+<li>Experimental compressed spools.
+<li>Default max article size of 10MB for feeder and reader (config setting).
+<li>Perl user authenticator for dreaderd.
+<li>More flexible LDAP auth for dreaderd.
+<li>Improvements to reader caching and new dexpirecache.
+<li>Many minor performance improvements to the various components.
+<li>Various new utilities.
+<li>Many minor improvements and new features.
+</ul>
+<b>Major changes from Diablo 4.1-REL to 4.2-REL:</b><br>
+<ul>
+<li>Detect yenc binary encoding
+<li>Upgrade to latest version of feeder-stats
+<li>Add a timeout for dreaderd connections to the spool
+<li>Fix bug in external filter handling of articles without trailing '\r\n.\r\n'
+<li>Allow filtering of incoming articles by msgid hash
+<li>Various bug fixes in dnewslink
+<li>AIX support
+</ul>
+<p>
+<b>Major changes from Diablo 4.0-REL to 4.1-REL:</b><br>
+<ul>
+<li>Security fix for NEWNEWS group restrictions
+<li>Add a timeout for spool connections in dreaderd
+<li>Improved internal spamfilter (NOTE: changed options)
+<li>Add an option to restrict maximum article size accepted by dreaderd
+<li>Improved stats logging for netremote in dreaderd
+<li>Improved logging code
+<li>Fixed compiling with USE_ZLIB enabled
+<li>Tru64 support and 64-bit platform fixes
+</ul>
+<p>
+<b>Major changes from Diablo 3.4-REL to 4.0-REL:</b><br>
+<ul>
+<li>Changes to the feeder storage format, including wireformat support
+    (Cannot move to older versions of diablo after upgrading)
+<li>Significant improvements to feed throughput latency with the
+    'notify' option in dnewsfeeds.
+<li>Significant improvement to history add performance (included in 3.4-REL)
+<li>Added new 'hashfeed' option to allow articles to be split across
+    newsfeeds and spools based on a hash of the Message-ID
+<li>Added inode based expire to feeder
+<li>Added ability for reader to retrieve articles from a local spool
+<li>Added Berkeley DB reader auth method
+<li>Added PAM reader auth method
+<li>Added ability to set maximum incoming article accept size
+<li>Added ability to change many diablo.config values while server
+    is running
+<li>Improvements to dreaderd netremote authentication method, including
+    feedback of accounting information on connection close.
+<li>Improvements to internal spamfilter (and changes to the options)
+<li>Reader header/overview directory structure now configurable and
+    the hash method can be selected and changed.
+<li>Reader article cache directory structure now configurable
+<li>Allow reader to select spools based on groups and group name hash
+    (hashfeed).
+<li>Experimental compressed newsfeed support
+<li>Compile-time option to allow auto-ban lists for abusive reader clients
+<li>Many, many bug fixes and small enhancements to most utilities, including
+    better documentation and simple usage reports when no options are
+    specified.
+</ul>
+<p>
+<b>Major changes from Diablo 3.3-REL to 3.5-REL:</b><br>
+<ul>
+<li>Security fix for information leak in NEWNEWS group restrictions
+<li>Fix history corruption bug and made a significant improvement to
+    history add performance.
+<li>Minor bug fixes to dexpire and diloadfromspool
+<li>Add 'quiet' option to reader config to stop logging of connects and
+    disconnects.
+</ul>
+<p>
+<b>Major changes from Diablo 3.0-REL to 3.3-REL:</b><br>
+<ul>
+<li>Improved handling of header rewrites in reader
+<li>Can now specify the directory structure layout for reader cache
+<li>Fixes for dnewsfeeds parsing and pattern matchng
+<li>Strip trailing whitespace in newsgroup names in reader
+<li>Don't accept invalid Message-ID's in IHAVE on reader
+<li>Use 423 response to article not found for request by art number
+<li>Add 'queueskip' and 'articlestat' options to dnewsfeeds
+<li>Don't compress whitespace in headers, except for XOVER
+<li>Other minor bug fixes
+<li>Fix buffer overflow for very long newsgroup names in reader
+<li>Fix bug in handling of multiple A records for incoming feeds
+<li>Fix bug in handling of on/off options in dnewsfeeds
+<li>Better handing of disk errors for incoming header feeds for dreaderd
+<li>Generate Xref entries for control groups in diablo
+<li>Fix missing diablo.hosts in feeder-stats.pl
+<li>Add an option to disable detailed reader logging
+<li>Performance improvements to dnewslink
+<li>Add bind options for dreaderd spool connections
+<li>Updated sample moderators file
+<li>Rename ignorebytes option to preservebytes in dnewsfeeds
+<li>Don't reject newgroup messages posted to newsgroups that don't (yet) exist.
+<li>Add a checkgroups option to dgrpctl
+<li>Compressed spool logging
+<li>Log incoming feed stats at NOTICE level
+<li>More efficient binary article type categorisation
+<li>Fix rate limit tax calculation so that it works
+<li>Dynamically adjust the usleep time for realtime feeds.
+<li>Add code to allow setting of compression level on compressed spools.
+<li>Swap order of bytes and articles entries in the 'info server' syslog line.
+<li>Add a per-session byte maximum value to dreaderd
+<li>Minor improvements to various programs
+<li>Many other minor bug fixes and enhancements.
+</ul>
+<p>
+<b>Major changes from Diablo 2.X to 3.0-REL:</b><br>
+<ul>
+<li>Completely rewritten spool system that allocates articles to spool
+  objects (directories/partitions) with a very flexible expiry mechanism
+  that allows different expire methods and times based on newsgroups,
+  article size, article type, etc. This also includes an experimental
+  compressed spool type.
+<li>Simplifed newsfeed configuration with all incoming and outgoing
+  configuration information in a single file (optional).
+<li>Vastly improved and performance enhanced filtering mechanisms with
+  3 different filter types and full configuration of which articles are
+  sent to each type of filter with the same options as newsfeeds.
+<li>Improved and syncronised command-line options for all utilities
+  with updated documentation and most options configurable in diablo.config.
+<li>Vastly improved stats gathering for both reader and feeder.
+<li>Efficient (optional) NEWNEWS support in reader.
+<li>Group restrictions per reader definition
+<li>New reader authentication types
+<li>Hook for C filter for local posts
+<li>Many bug fixes
+<li>Many other minor enhancements
+</ul>
+<br>
+<p>
+</body>
+</html>
+

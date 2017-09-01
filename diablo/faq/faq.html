@@ -1,0 +1,173 @@
+<html>
+<head><title>Diablo FAQ</title></head>
+<body bgcolor="#ffffff">
+<center><h2>Diablo FAQ</h2></center>
+
+<p>
+This FAQ attempts to answer Frequently Asked Questions about 
+<a href="http://www.openusenet.org/diablo">Diablo</a> Usenet server
+software. 
+<p><i>FAQ Revised: Sun Jun 30 12:50:06 2002</i></p>
+<hr><h2>Table of Contents</h2>
+<dl>
+<dt><b>1. General</b></dt>
+<dd><ul>
+<li><a href="#General0">1.1. What is Diablo?</a></li>
+<li><a href="#General1">1.2. Where can I download diablo?</a></li>
+<li><a href="#General2">1.3. What version should I run?</a></li>
+<li><a href="#General3">1.4. Is there a mailinglist?</a></li>
+<li><a href="#General4">1.5. What about a newsgroup?</a></li>
+<li><a href="#General5">1.6. How do I contribute to Diablo?</a></li>
+<li><a href="#General6">1.7. What OS should I run Diablo on?</a></li>
+<li><a href="#General7">1.8. Where is the latest version of this FAQ?</a></li>
+</ul></dd>
+<dt><b>2. Newsfeeder</b></dt>
+<dd><ul>
+<li><a href="#Newsfeeder0">2.1. What is a newsfeeder or news transit system?</a></li>
+<li><a href="#Newsfeeder1">2.2. How much bandwidth does a transit server need?</a></li>
+<li><a href="#Newsfeeder2">2.3. How much diskspace do I need?</a></li>
+<li><a href="#Newsfeeder3">2.4. How much memory do I need?</a></li>
+<li><a href="#Newsfeeder4">2.5. Are there any tools to make usage statistics?</a></li>
+</ul></dd>
+<dt><b>3. Newsreader</b></dt>
+<dd><ul>
+<li><a href="#Newsreader0">3.1. What is newsreading?</a></li>
+<li><a href="#Newsreader1">3.2. What is overview?</a></li>
+<li><a href="#Newsreader2">3.3. How much diskspace do I need for overview?</a></li>
+<li><a href="#Newsreader3">3.4. Should I use the cache option?</a></li>
+<li><a href="#Newsreader4">3.5. How much diskspace do I need for the cache?</a></li>
+<li><a href="#Newsreader5">3.6. How much diskspace do I need for the backend spool?</a></li>
+<li><a href="#Newsreader6">3.7. How much memory do I need?</a></li>
+<li><a href="#Newsreader7">3.8. Can I combine newsreading with newsfeeding?</a></li>
+</ul></dd>
+<dt><b>4. Utilities</b></dt>
+<dd><ul>
+<li><a href="#Utilities0">4.1. Which utiluties are available?</a></li>
+<li><a href="#Utilities1">4.2. How long will dexpire take to expire articles on the spool?</a></li>
+<li><a href="#Utilities2">4.3. How long will dexpireover take to expire overview data?</a></li>
+<li><a href="#Utilities3">4.4. How can I keep my dactive file on my reader box in sync with the one on my spool server?</a></li>
+</ul></dd>
+<dt><b>5. Operations</b></dt>
+<dd><ul>
+<li><a href="#Operations0">5.1. How should I partition my transit server?</a></li>
+<li><a href="#Operations1">5.2. How should I partition my reader server?</a></li>
+<li><a href="#Operations2">5.3. I heard something about inodes. What about them?</a></li>
+<li><a href="#Operations3">5.4. Can I safely upgrade to 3.x from 2.x without losing my spool?</a></li>
+<li><a href="#Operations4">5.5. Can I safely upgrade to 4.x from 3.x?</a></li>
+</ul></dd>
+<dt><b>6. Problems</b></dt>
+<dd><ul>
+<li><a href="#Problems0">6.1. I keep getting "Maximum file descriptors exceeded", what's wrong?</a></li>
+<li><a href="#Problems1">6.2. After I switched to Diablo, I suddenly see a drop in outbound traffic. Why?</a></li>
+<li><a href="#Problems2">6.3. My monitoring system sends an alert when diablo is in pause mode. How can I get rid of this?</a></li>
+<li><a href="#Problems3">6.4. When I start a new server, new news disappears even though my dexpire.ctl file is correct. What is wrong?</a></li>
+<li><a href="#Problems4">6.5. I sometimes see different headers for the same article, how can that be?</a></li>
+<li><a href="#Problems5">6.6. My history file appears to be corrupt - what should I do?</a></li>
+</ul></dd>
+<dt><b>7. Examples</b></dt>
+<dd><ul>
+<li><a href="#Examples0">7.1. FreeBSD using vinum on large spool servers</a></li>
+</ul></dd>
+</dl>
+<hr><h2>1. General</h2>
+<dl>
+<dt><b><a name="General0">1.1. What is Diablo?</a></b></dt>
+<dd><p>Diablo is an opensource Usenet transit and reader package. It is meant to be fast, scalable and flexible. It was originally written by Matt Dillon, and is currently being maintained by a team of developers.<br><br></dd>
+<dt><b><a name="General1">1.2. Where can I download diablo?</a></b></dt>
+<dd><p>The official home page for Diablo can be found at <a href="http://www.openusenet.org/diablo">http://www.openusenet.org/diablo</a>.<br><br></dd>
+<dt><b><a name="General2">1.3. What version should I run?</a></b></dt>
+<dd><p>Most people should run the latest release version. The current release is <a href="http://www.openusenet.org/diablo/download/diablo-4.1-REL.tgz">4.1-REL</a>. It is recommended to upgrade to the latest release version whenever possible. <p>There are 2 development branches. <ul><li>The STABLE branch is maintenance code of the latest REL version. It is usually not necessary to upgrade to a STABLE branch, but if you feel you need a certain fix or addition, it is most likely safe to upgrade.<li>Then there is the CURRENT branch. They are not Diablo release versions, but are bleeding edge work in progress. This code is not supported, and may set your server on fire. </ul><br><br></dd>
+<dt><b><a name="General3">1.4. Is there a mailinglist?</a></b></dt>
+<dd><p>There are 2 mailinglists about Diablo. <p><ul><li> <a href="http://www.plig.net/mailman/listinfo/diablo-announce">diablo-announce</a> - moderated list for announcements concerning Diablo. <li> <a href="http://www.plig.net/mailman/listinfo/diablo-users">diablo-users</a> - open list for general discussion concerning Diablo and its development. </ul><br><br></dd>
+<dt><b><a name="General4">1.5. What about a newsgroup?</a></b></dt>
+<dd><p>There is no newsgroup dedicated to Diablo. Diablo related discussions sometimes take place in news.software.nntp. It is best to use the mailinglist.<br><br></dd>
+<dt><b><a name="General5">1.6. How do I contribute to Diablo?</a></b></dt>
+<dd><p>First of all, make sure you are on the diablo-users mailinglist. Since Diablo is still work in progress, it is the primary place to voice your opinion on developments. <p>If you have any patches, please send them to the diablo-users mailinglist for review with as much explanation as possible.<br><br></dd>
+<dt><b><a name="General6">1.7. What OS should I run Diablo on?</a></b></dt>
+<dd><p>Diablo was originally developed on FreeBSD and will perform very well on it. <p>Success has been reported on: <br><ul><li>FreeBSD<li>BSD/OS<li>Linux<li>Solaris</ul><br>Please report other Operating Systems to cor@xs4all.nl so they can be included in this FAQ.<br><br></dd>
+<dt><b><a name="General7">1.8. Where is the latest version of this FAQ?</a></b></dt>
+<dd><p>You can find the latest version of the Diablo FAQ at <a href="http://www.xs4all.nl/~scorpio/diablo/faq.html">http://www.xs4all.nl/~scorpio/diablo/faq.html</a>.<br><br></dd>
+</dl>
+<hr><h2>2. Newsfeeder</h2>
+<dl>
+<dt><b><a name="Newsfeeder0">2.1. What is a newsfeeder or news transit system?</a></b></dt>
+<dd><p>Newsfeeding is the exchange of news articles between newsservers. A news feed is a collection of newsgroups ranging from just local groups to full news feeds with tens of thousands of groups. Larger newsfeeder systems are typically called News Transit systems. They aspire to propagate news messages between organisations as fast as possible.<br><br></dd>
+<dt><b><a name="Newsfeeder1">2.2. How much bandwidth does a transit server need?</a></b></dt>
+<dd><p>This depends on the number and size of news feeds you handle. Small feeds with just local groups don't need much bandwidth. For a full feed you have to be prepared to handle dozens of megabits. A full feed runs at over 300 GB of traffic a day. This does not include outgoing traffic, which can easily grow well beyond that.<br><br></dd>
+<dt><b><a name="Newsfeeder2">2.3. How much diskspace do I need?</a></b></dt>
+<dd><p>This depends on the size of your news feed. For a small newsfeeder, a few GB can be sufficient. For a full feed it all depends on your situation and how long you want to keep your backlogs for slow or down servers. Remember, a full feed needs over 300 GB a day, so if you want to keep those articles around for 1 day, you will need at least 300 GB dedicated to your spool. If you do not care about backlogged or down servers, you can suffice with a fraction of that amount. See also the newsreader section.<br><br></dd>
+<dt><b><a name="Newsfeeder3">2.4. How much memory do I need?</a></b></dt>
+<dd><p>As with almost any application, the more memory, the better. Diablo makes quite extensive use of memory mapping files, so appears to use a lot more memory than it really does. Cater for around 700KB per outgoing feed process and 1MB per incoming feed process. Those are probably the absolute minimum and try and double those figures to get decent performance. Large Diablo transit servers typically have 2GB of memory.<br><br></dd>
+<dt><b><a name="Newsfeeder4">2.5. Are there any tools to make usage statistics?</a></b></dt>
+<dd><p>To make pretty pictures of the usage of your diablo server, try out the <a href="ftp://ftp.shub-internet.org/pub/shub/brad/news/feeder-stats.pl">feeder-stats</a> package. This can also be found in the contrib directory of the Diablo source.<br><br></dd>
+</dl>
+<hr><h2>3. Newsreader</h2>
+<dl>
+<dt><b><a name="Newsreader0">3.1. What is newsreading?</a></b></dt>
+<dd><p>Newsreading (in this case) is the service that allows clients to retrieve news articles for reading.<br><br></dd>
+<dt><b><a name="Newsreader1">3.2. What is overview?</a></b></dt>
+<dd><p>When a client connects to a news server, it first gets an index of articles. Because it would be too expensives in terms of resources to create this index on-the-fly, news servers typically maintain a database of summary information about the articles.<p>This usually contains Subject, From, Date, References, and Message-ID headers from the articles.<br>This database is called the Overview database.<br><br></dd>
+<dt><b><a name="Newsreader2">3.3. How much diskspace do I need for overview?</a></b></dt>
+<dd><p>This depends on the size of your newsfeed and how you configure your dexpire.ctl. For a full newsfeed you'll need about 20GB for 30 days of news.<br><br></dd>
+<dt><b><a name="Newsreader3">3.4. Should I use the cache option?</a></b></dt>
+<dd><p>If you have a seperate spool and reader server, it is highly recommended to use the cache. Don't let your cache partition fill up though. It will seriously affect performance.<br><br></dd>
+<dt><b><a name="Newsreader4">3.5. How much diskspace do I need for the cache?</a></b></dt>
+<dd><p>Unfortunately, at this time the cache will fill all space available on a partition. You can not set a limit. This means you have to manually remove files from the cache. It is therefor recommended to put the cache on a seperate partition, so a full cache disk will not interfere with other parts of your news server. Typically you will need a few dozen GB for a large system. Smaller systems may only need a few GB.<p> To clean out your cache disk you can use something like this: <br><br> if ( -d /news/spool/cache/. ) then<br> cd /news/spool/cache/<br> find . -type f -mmin +720 -print &#124; xargs rm<br> endif <p> Vary the parameters for your specific situation.<br><br></dd>
+<dt><b><a name="Newsreader5">3.6. How much diskspace do I need for the backend spool?</a></b></dt>
+<dd><p>This depends on the size of your newsfeed and how long you want your articles to be available to clients. A full newsfeed is around 300 GB a day. So to keep 2 weeks of a full newsfeed available to your clients, you need 4 to 5 TB &#40;yes, that is terrabytes&#41;. These monster size servers are pretty rare nowadays, so don't feel bad to have a much smaller backend spool available. You can save a lot of diskspace by not providing certain large binary newsgroups.<br><br></dd>
+<dt><b><a name="Newsreader6">3.7. How much memory do I need?</a></b></dt>
+<dd><p>This depends on how many concurrent readers you expect to have and the expire times of your articles. The dreaderd processes can easily grow to 40MB of memory. If you expect a lot of clients, put at least 1GB of memory in the server.<br><br></dd>
+<dt><b><a name="Newsreader7">3.8. Can I combine newsreading with newsfeeding?</a></b></dt>
+<dd><p>Yes, you can run both diablo and dreaderd on one server. Typically you would run diablo on a different port, and dreaderd on port 119. You will still have to provide dreaderd with a headonly newsfeed so the reader process can build the overview database. <p><b>This is only recommended for small servers!</b> For larger systems with dozens or more concurrent clients, it is highly recommended to seperate the reader processes from the diablo processes and use two servers.<br><br></dd>
+</dl>
+<hr><h2>4. Utilities</h2>
+<dl>
+<dt><b><a name="Utilities0">4.1. Which utiluties are available?</a></b></dt>
+<dd><p>The following utilities are part of Diablo:<br><br><ul><li>dexpire - Used to expire articles in the spool.<li>dexpireover - Used to expire overview files.<li>dclient - Execute a command on an NNTP server and write output to stdout.<li>dfeedinfo - Show and manipulate feed statistics.<li>dfeedtest - show which dnewsfeeds entries match an article.<li>dgrpctl - add/modify/delete newsgroups from the active file.<li>dfeedinfo - Get statistics about your feed system.<li>dhisbench - Test the performance of your history.<li>dicmd - Control the diablo server.<li>drcmd - Control the dreaderd server.<li>didump - dump the dhistory file in a human readable form.<li>diload - Appends history data to the history file.<li>diloadfromspool - Regenerate dhistory database from spool.<li>dilookup - Lookup a message-id in the dhistory file.<li>dkp - Diablo program to manage DKP databases.<li>dlockhistory - lock the history file into memory to safely operate on the history file.<li>doutq - Show the outgoing queue status.<li>dsyncgroups - Syncronise the active file with a another newsserver.<li>dreadart - read an article from the article spool (spool/feed server only).<li>doverctl - Perform maintenance on your overview data.<li>dreadover - retrieve the overview data/headers for a group:artno.</ul><br><br></dd>
+<dt><b><a name="Utilities1">4.2. How long will dexpire take to expire articles on the spool?</a></b></dt>
+<dd><p>Because of the way diablo was designed dexpire will only take at most a few minutes to complete.<br><br></dd>
+<dt><b><a name="Utilities2">4.3. How long will dexpireover take to expire overview data?</a></b></dt>
+<dd><p>This can take anything from several minutes, to several hours, depending on the size of your backend spool. For a multiTB spool, with 30 days of data, using the -R option, this takes upto 10 hours. It is recommended to run dexpireover -R only once a week, and dexpireover -a once a day.<br><br></dd>
+<dt><b><a name="Utilities3">4.4. How can I keep my dactive file on my reader box in sync with the one on my spool server?</a></b></dt>
+<dd><p>You can add the following to one of your hourly adm files:<br><br>/news/dbin/dsyncgroups -h &#60;name of spoolserver&#62; -aD<br><br></dd>
+</dl>
+<hr><h2>5. Operations</h2>
+<dl>
+<dt><b><a name="Operations0">5.1. How should I partition my transit server?</a></b></dt>
+<dd><p>The single most important part of a transit server is the dhistory file. It is a database of all message-ids on your spool. Every time an article comes in, it needs to be checked against the dhistory file. It is thus smart to have this file on a fast filesystem. <p>Another important part of a transit server is the spool. This can be anything from a few GB, to terrabytes. Since there is a chance this partition can fill up, it is recommended to put it on a seperate partition by itself.<p>A typical partition table will then look like this: <br><br>/<br>/usr<br>/var<br>/news<br>/news/spool/news<br><p>To speed up /news you could use a fast RAID system, or use OS specific tricks. See the FreeBSD example in the Examples section.<br><br></dd>
+<dt><b><a name="Operations1">5.2. How should I partition my reader server?</a></b></dt>
+<dd><p>The two important parts of a reader server are the overview database and the cache. Since the cache can grow to fill a disk, it is recommended to put this on a seperate partition. A typical partition table will then look like this: <br><br>/<br>/usr<br>/var<br>/news<br>/news/spool/cache<p>Make sure /news is large enough to hold your overview data.<br><br></dd>
+<dt><b><a name="Operations2">5.3. I heard something about inodes. What about them?</a></b></dt>
+<dd><p>Like any server, a news server can crash and need an fsck to come back up. Large filesystems, like those of large backend spool servers, tend to have a huge amount of inodes by default. Fsck will then need a very long time to fix your filesystem. <p>Because of the way diablo stores its articles, even multi-TB spoolservers only use a few thousand inodes. By configuring your spool filesystem to only have say 50,000 inodes, you can reduced the fsck time to mere seconds. <p>Thanks to Joe Greco for pointing this out to all of us running very large spools.<br>Be sure NOT to do this to your cache partition.<br><br></dd>
+<dt><b><a name="Operations3">5.4. Can I safely upgrade to 3.x from 2.x without losing my spool?</a></b></dt>
+<dd><p>Yes, you can safely upgrade. Diablo 3.x uses a new spool system but it's possible to configure your original 2.x spool as a spoolobject in 3.x. Make sure you configure dspool.ctl as follows:<br><br>spool 00<br>&nbsp;&nbsp;minfree     2g #or any other value<br>&nbsp;&nbsp;#spooldirs 8 (if you have spooldirs under 2.x, define this replacing 8 with the number of spooldirs)<br>end<br><br>metaspool trad<br>	&nbsp;&nbsp;spool       00<br>end<br><br>expire  *       trad<br><br><br><br></dd>
+<dt><b><a name="Operations4">5.5. Can I safely upgrade to 4.x from 3.x?</a></b></dt>
+<dd><p>Yes, 4.x is backwards compatible with 3.x. Some things to keep in mind: <br><br> - Be aware that once you use features like "wireformat" in 4.x, you can not switch back to 3.x without losing your spool.<br> - We recommend that you stop using dnntpspool.ctl and switch to the dnewsfeed options as dnntspool.ctl isn't being supported anymore.<br> - Some tools, most noticably dexpireover and dexpire have different switches. For instance, dexpireover needs a -y now to actually do the deletion of data.<br><br></dd>
+</dl>
+<hr><h2>6. Problems</h2>
+<dl>
+<dt><b><a name="Problems0">6.1. I keep getting "Maximum file descriptors exceeded", what's wrong?</a></b></dt>
+<dd><p>Check lib/defs.h for the lines:<br><br>#define MAXFORKS        256<br>#define MAXFEEDS        128<br><br>Increase those numbers, but don't set them too high because they determine the size of some datastructures and hence use more memory. Also make sure that your OS FD_SETSIZE is high enough.<br><br></dd>
+<dt><b><a name="Problems1">6.2. After I switched to Diablo, I suddenly see a drop in outbound traffic. Why?</a></b></dt>
+<dd><p>Diablo has an inherent latency in the design of the outgoing feed system. This makes Diablo push articles to peers slightly slower than other, non-Diablo, peers. The result is a drop in outgoing news to peers.<br><br></dd>
+<dt><b><a name="Problems2">6.3. My monitoring system sends an alert when diablo is in pause mode. How can I get rid of this?</a></b></dt>
+<dd><p>Change the label associated with your monitoring system IP to readonly. Diablo will accept connections from it, even in pause mode.<br><br></dd>
+<dt><b><a name="Problems3">6.4. When I start a new server, new news disappears even though my dexpire.ctl file is correct. What is wrong?</a></b></dt>
+<dd><p>The overview data uses a system where each group has a maximum number of articles, or slots. Dexpireover increases or decreases this maximum when needed. But since normally dexpireover runs say once a day, and the start values are quite low, you only see this maximum number of articles in the group. There are 2 ways to fix this. <br><br> - run dexpireover every hour for a week or 2, to get things going. <br> - use the 'i' option in dexpire.ctl. Be aware though that this can cause your disks to fill up.<br><br></dd>
+<dt><b><a name="Problems4">6.5. I sometimes see different headers for the same article, how can that be?</a></b></dt>
+<dd><p>This is normal and has to do with the way diablo gets article from the spool. There are two ways to get an article. You either supply a message-id directly, or you supply a groupname and article number. When you supply an article number dreaderd uses the overview database to translate this to a message-id, but at the same time remembers other headers from the article that are also available in the overview database. The Path: header is an example of this. Dreaderd then fetches the article from the backend spool, and replaces some article headers with the versions it knows from overview. This was done because some clients get confused when the last entry in the Path: header doesn't match the Xref: hostname. When you supply a message-id directly, none of this "munging" is done and you get the article as it appears on the spoolserver.<br><br></dd>
+<dt><b><a name="Problems5">6.6. My history file appears to be corrupt - what should I do?</a></b></dt>
+<dd><p>If there is any way to recover your history file, it can be done with the biweekly.atrim script to rebuild a new history. Run it. The "didump&#124;diload" combination rebuilds the history file by scanning through the old dhistory sequentially and extracting all records for the new dhistory. This shouldn't take too long, unless you have a very large history. You can get an idea of the run time by checking the log of the last time it was run &#40;twice a week, if your use the standard crontab&#41;<p><p>If that fails, the next step is to rebuild the history file from the contents of the spool. This is done with the command: <p><p>diloadfromspool -a<p><p>Use the '-f' option if you can afford to not having incoming feeds for the duration of the rebuild. <br>For better performance, if you have multiple spools, run a separate diloadfromspool for each spool: <p><p> diloadfromspool -S 01 &<br>diloadfromspool -S 02 &<br>...<p><p>Note that the rebuild can take a very long time on large spools as every article has to be read from disk.<br><br></dd>
+</dl>
+<hr><h2>7. Examples</h2>
+<dl>
+<dt><b><a name="Examples0">7.1. FreeBSD using vinum on large spool servers</a></b></dt>
+<dd><p>To speed up /news on FreeBSD when you have a lot of disks available, it may be a good idea to use a vinum mirror partition. <p>Split every spooldisk in two parts. A relatively small section, about 1GB or so depending on the amount of disks, and a section containing the rest of the disk. Use the 1GB sections to create a very fast mirrored /news. You can then use the larger sections to create either seperate spooldirs or another vinum partition.<p>For an example vinum file of one of Cor's system see <a href="http://www.xs4all.nl/~scorpio/diablo/vinum.txt">http://www.xs4all.nl/~scorpio/diablo/vinum.txt</a>. <br>The corresponding partitions will look like <a href="http://www.xs4all.nl/~scorpio/diablo/df.txt">http://www.xs4all.nl/~scorpio/diablo/df.txt</a>.<p>Again thanks to Joe Greco for thinking up this setup.<br><br></dd>
+</dl>
+<hr>
+
+<p> Cor Bosman &lt;cor@xs4all.nl&gt;
+</p>
+
+</BODY>
+</HTML>

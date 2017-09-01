@@ -1,0 +1,23 @@
+# ======================================================================
+# DIABLO.CONFIG - sample for a spool server, which also functions as
+#	a number master and header feeder
+#
+version 2.0
+
+# We need to generate Xref: lines for the reader
+active		on
+activedrop	on
+feederxrefhost	master.example.com
+
+# We need to allow lots of connections from the reader
+maxconnect	25
+
+# Enable the internal duplicate body filter for binaries
+internalfilter	B6
+# Use an external spamfilter for non-binary articles (e.g: cleanfeed)
+# Cleanfeed can be obtained from: http://www.bofh.it/~md/cleanfeed/
+feederfilter	/news/dbin/filter/spamfilter
+
+# Spool recovery is difficult if articles contain nul's - reject them
+rejectartswithnul on
+

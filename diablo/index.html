@@ -1,0 +1,97 @@
+<html>
+<head><title>Diablo Usenet Software</title></head>
+<body bgcolor="#ffffff">
+<center>
+<h2>Diablo Usenet Software</h2>
+<h4>Welcome to the home of Diablo - newsfeeding and newsreading server software.</h4>
+</center>
+<hr>
+Diablo is a comprehensive newsfeeding and newsreading software package
+that was originally developed by <a href="http://www.backplane.com/">
+Matthew Dillon</a> and now run as an open source project.
+<p>
+Diablo currently requires XMake to compile. XMake is available from the
+<a href="download/">downloads</a> page.
+<p>
+The latest release version of Diablo is
+<a href="download/diablo-5.1-REL.tgz">5.1-REL</a>. This and  previous
+versions of Diablo are available from
+the <a href="download/">OpenUsenet Diablo download</a> page.
+<p>
+<b>Major changes from Diablo 5.0-REL to 5.1-REL:</b><br>
+<ul>
+<li>Fix a posting corruption bug that has existed since the original Diablo - highly recommended to upgrade to fix this.
+<li>Maximum Age Policy - controls maximum article age.
+<li>Changes to hashfeed - REQUIRES CONFIG FILE CHANGE if hashfeed is enabled.
+<li>New diablo.config option 'readeridenttimeout'.
+<li>New dreaderd option 'ratelimitrange'.
+<li>New contrib/ for 'feedgraph' - RRD graphs for feeds.
+<li>New dreaderd dserver.hosts options 'retention' and 'groupdef'.
+<li>Extension fo dexpire '-s' to sync after a number of files deleted.
+<li>Various improvements to mmap and madvise compatibility.
+<li>New diablo.config option 'feedermaxheadersize'.
+<li>Many, many other smaller additions, fixes and performance improvements.
+</ul>
+<p>
+Full details of the changes can be found in the
+<a href="download/RELEASE_NOTES.txt">RELEASE_NOTES</a>.<br>
+<p>
+<a href="release-info.html">Lists of major changes</a> between older
+versions of Diablo are also available.
+<p>
+Please report any bugs to diablo-bugs at openusenet.org.<br>
+<hr>
+<center><h4>Documentation</h4></center>
+Most of the Diablo documentation is included in the source distribution.
+This includes the README.* files, man pages and most importantly, the
+example files which are heavily commented.
+<p>
+Further documentation is:
+<ul>
+<li><a href="http://www.xs4all.nl/~scorpio/diablo/faq.html">The Diablo FAQ</a>
+<li><a href="faq/faq.html">Local copy of FAQ</a>
+<li> A <a href="doc/upgrade-hints.html">hints file</a> for those upgrading from
+     previous versions
+<li>The mailing list archives (see below).
+<li>Lew Payne has kindly written a step-by-step example to
+    <a href="doc/feeder-example.txt">setting up a Diablo feeder</a>.
+<li>I have written a simple guide to <a href="doc/reader-example/">
+    setting up a Diablo reader complex</a>.
+<li>For those interested in seeing how the various parts of Diablo fit
+    together in a large news system, Joe Greco has an excellent
+    <a href="http://www.nntp.sol.net/sane2000/slides/30.html">
+    ascii art picture</a> from his <a href="http://www.nntp.sol.net/sane2000/">
+    slide show</a> presented at <a href="http://www.nluug.nl/events/sane2000">
+    SANE2000</a>.
+    and Cor Bosman has made a <a href="http://www.xs4all.nl/~scorpio/news.jpg">
+    more colourful picture</a> of his installation available.<br>
+<li>Notes for <a href="developers.html">prospective developers and submitting patches</a>.
+</ul>
+<hr>
+<center><h4>Diablo Mailing Lists</h4></center>
+There are some discussion lists available for Diablo. They are:<br>
+<ul>
+<li><a href="http://www.openusenet.org/mailman/listinfo/diablo-announce">
+    diablo-announce</a> - moderated list for announcements concerning Diablo
+<li><a href="http://www.openusenet.org/mailman/listinfo/diablo-users">
+    diablo-users</a> - open list for general discussion concerning Diablo
+ and it's development.
+</ul>
+To subscribe, send an email message to <b>LISTNAME-request@openusenet.org</b>
+(replacing LISTNAME with the name of the list above) with the body of the
+message containing the single word 'subscribe'.
+<p>
+You can also subscribe by following the links above, which include
+access to the mail archives if you are subscribed.<br>
+<hr>
+<center><h4>News Server Alternatives</h4></center>
+If you are interested in an alternative to Diablo for newsreading and
+newsfeeding, <a href="http://www.eyrie.org/~eagle/software/inn/">INN</a> is
+probably what you need as the next best thing in free Usenet server
+software.
+<hr>
+The word 'diablo' means 'devil' in Spanish.
+<p>
+</body>
+</html>
+

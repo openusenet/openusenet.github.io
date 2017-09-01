@@ -1,0 +1,10 @@
+# ======================================================================
+# DSERVER.HOSTS - configure which machines have whole articles and
+# where we send locally posted articles
+# --------------------------------------------------------------
+#
+# We only have a single spool (the feeder), so fetch and send everything
+# from/to it.
+#
+feeder.example.com	s1o1
+

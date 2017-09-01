@@ -1,0 +1,38 @@
+# ======================================================================
+# DSPOOL.CTL - sample for a spool server, which also functions as
+#	a number master and header feeder
+#
+# Create a spool for text articles, setting a maximum amount of space
+# they can use and a maximum age
+# Will be located in: /news/spool/news/P.01
+spool 01
+    maxsize    200g
+    keeptime   30d
+end
+
+# Create 2 spools for binaries and allow them to use all space, except
+# maintain 4GB free.
+# Will be located in: /news/spool/news/P.02 and /news/spool/news/P.03
+spool 02
+    minfree    4g
+end
+spool 03
+    minfree    4g
+end
+
+# Create the binaries and text meta spools.
+metaspool nonbin
+    spool      1
+    arttypes   !binaries
+end
+metaspool binaries
+    spool      2
+    spool      3
+    arttypes   binaries
+end
+
+expire *.bina*         binaries
+expire *               nonbin
+
+# ======================================================================
+

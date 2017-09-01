@@ -1,0 +1,118 @@
+<center><h2>Simple Example Diablo Reader Installation</h2></center>
+
+At first glance, the Diablo reader appears quite complex, but after
+learning some of the concepts and methods behind the way things are
+done, the process is actually very simple.
+<p>
+The main concept to grasp is that the diablo reader is really
+only a frontend to a backend spool. i.e: something similar, but not
+quite the same, as a cache server. The frontend basically only
+keeps track of the article headers and which articles are in
+which groups. Most of the client browsing consists of looking
+at article subject lines within a group and downloading the
+occasional article. Because dreaderd has its own copies of
+the headers, the Subjects can be provided very easily and quickly
+from the local "cache".
+<p>
+This example assumes two servers:
+<p>
+<ul>
+<li> a spool server, which also acts as the header feed to the
+   reader and does the article numbering. The machine will be
+   called "feeder.example.com".
+<li> a reader frontend that accepts a header feed from the spool,
+   deals with client connections and requests, fetches articles
+   from the spool and sends postings back to the spool for
+   relaying to the world and back to the reader frontend.
+   This machine is named "reader.example.com".
+</ul>
+<p>
+Some of the above functions can be split off into separate
+servers. e.g: The number master and header feeder could be
+2 different machines. For this example, we are limited to
+2 machines, so we get the spool doing the same functions.
+<p>
+<hr>
+<h4>Spool Server Installation</h4>
+Note that the spool server for a diablo reader can exist on the
+same machine as the reader, but for this example, we will assume
+they exist on separate machines. The concept is the same because
+the spool and reader on the same machine are distinct sub-systems,
+that only interact with each other through NNTP and perhaps share
+a couple of configuration files.
+<p>
+We need to setup the following:
+<p>
+<ol>
+ <li> accept articles from a news peer (our incoming newsfeed)
+ <li> filter incoming articles for spam
+ <li> store the articles on the spool, separating binaries and text
+     articles into different partitions.
+ <li> provide a header feed to the reader
+ <li> accept posts from the reader
+ <li> forward posts from the reader back to our peer
+ <li> generate article numbers are store them in the Xref: header
+</ol>
+<p>
+The configuration files required are:
+<ul>
+ <li><a href="diablo.config.feeder.txt">diablo.config</a> - the main
+	configuration - handles step (7) and other configuration options
+ <li><a href="dnewsfeeds.txt">dnewsfeeds</a> - handles steps (1), (2), (4),
+	(5) and (6)
+ <li><a href="dspool.ctl.txt">dspool.ctl</a> - handles step (3)
+</ul>
+<p>
+A crontab (see the sample crontab in the adm/ directory) needs to
+be setup to run:
+<ol>
+ <li> hourly.expire - expire old articles on the spool objects and maintain
+     free space
+ <li> biweekly.atrim - rebuild history, cleaning out older articles
+ <li> dspoolout - push outgoing newsfeeds
+ </ol>
+<p> 
+The server needs to be started with the following command-line (modify
+in the rc.news script): <br> 
+<pre>
+  dbin/diablo -p feeder.example.com server "-s                                                                             "
+</pre><br>
+substituting 'feeder.example.com' for the entry that needs to go into the
+Path: line for this host (usually the local hostname.domain).
+<p>
+<hr>
+<h4>Reader Installation</h4>
+For a reader to handle client requests, we need to setup the following:<br>
+<ol>
+ <li>Accept an incoming header feed
+ <li>Accept connections from clients
+ <li>Create connections the spool server to retrieve articles
+ <li>Create connections the spool server to post articles
+ <li>Expire old articles
+</ol>
+The configuration files required are:
+<ul>
+ <li><a href="diablo.config.reader.txt">diablo.config</a> - the main
+	configuration
+ <li><a href="dreader.access.txt">dreader.access</a> - handles steps (1) and (2)
+ <li><a href="dserver.hosts.txt">dserver.hosts</a> - handles steps (3) and (4)
+ <li><a href="dexpire.ctl.txt">dexpire.ctl</a> - handles step (5)
+</ul>
+<p>
+A crontab (see the sample crontab in the adm/ directory) needs to
+be setup to run:
+<ol>
+ <li> daily.reader - expire old headers and resize indexes
+ <li> weekly.reader - rebuild header db files
+ </ol>
+<p>
+The server needs to be started with the following command-line (modify
+in the rc.news script): <br> 
+<pre>
+  dbin/dreaderd -x master.example.com -p reader.example.com -s "                                                                               "
+</pre>
+Note that the '-x' line must match with the feederxrefhost specified in
+diablo.config for the spool/feeder.
+<p>
+<hr>
+

@@ -1,0 +1,29 @@
+# ======================================================================
+# DREADER.ACCESS - setup which clients can access the reader
+#
+# --------------------------------------------------------------
+#
+# Define some simple access capabilities
+
+# Allow read and post
+readerdef rp
+  read                  yes
+  post                  yes
+end
+
+# Allow read-only with no authentication
+readerdef ro
+  read                  yes
+end
+
+# Allow feed-only
+readerdef feed
+  feed                  yes
+end
+
+# Allow read/post to all our local machines
+access	*.example.com	rp
+
+# The feeder will get allocated a special process
+access	feeder.example.com	feed
+

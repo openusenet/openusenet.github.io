@@ -1,0 +1,60 @@
+# ======================================================================
+# DNEWSFEEDS - sample for a spool server, which also functions as
+#	a number master and header feeder
+# --------------------------------------------------------------
+# A GLOBAL label is required, even if it is empty:
+
+label GLOBAL
+end
+
+# --------------------------------------------------------------
+# Steps (1) and (6) are handled with entry like the following:
+
+label peer
+    inhost	peer.example.com
+    hostname	peer.example.com
+    alias	peer.example.com
+    addgroup	*
+    rtflush	on
+    realtime	on
+end
+
+# --------------------------------------------------------------
+# Step (2) is handled with the following entries
+# Send all binaries to the internal filter for duplicate detection
+label ISPAM
+    addgroup    *
+    arttypes    binary
+end
+
+# Send all non-binaries to the external filter (cleanfeed is a good one)
+label ESPAM
+    addgroup    *
+    arttypes    !binary
+end
+
+# Filter binaries in non-binary newsgroups and reject them at reception
+label IFILTER
+    addgroup    *
+    delgroup    *.bina*
+    arttypes    binary
+end
+
+# --------------------------------------------------------------
+# Steps (4) and (5) are provided with the following:
+# NOTE: The alias entry contains an invalid entry, because we have to
+#  be able to send articles received from the reader back to the
+#  reader. If we put the reader's Path: entry into the alias line,
+#  the articles would be excluded because the reader adds itself to
+#  the Path: line before sending the posted articles to the spool.
+label reader
+    inhost	reader.example.com
+    hostname	reader.example.com
+    alias	dummy.reader.example.com
+    addgroup	*
+    rtflush	on
+    realtime	on
+    nospam	on
+    maxconnect	25
+end
+

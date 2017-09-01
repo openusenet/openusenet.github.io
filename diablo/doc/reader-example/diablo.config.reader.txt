@@ -1,0 +1,15 @@
+# ======================================================================
+# DIABLO.CONFIG - sample for a reader frontend
+# --------------------------------------------------------------
+#
+version 2.0
+
+# Configure what processes we need running.
+# Only one incoming dedicated feed process is necessary and multiple
+# feeds can connect to it if necessary.
+#
+readerforks	10
+readerthreads	40
+readerdns	5   
+readerfeedforks	1
+
